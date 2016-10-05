@@ -40,8 +40,22 @@ class CanNode(object):
 			print(node)
 
 	def insertNode(self,node):
+
+		vertical_line,horizontal_line = self.getRigeon().getLineLength()
+
+		if vertical_line < horizontal_line:
+			rigeon1,rigeon2 = self.getRigeon().divideRigeonHorizontally()
+
+		elif vertical_line > horizontal_line:
+			rigeon1,rigeon2 = self.getRigeon().divideRigeonVertically()
+
+		else:
+			if randint(0,1) == 0:
+				rigeon1,rigeon2 = self.getRigeon().divideRigeonHorizontally()
+			rigeon1,rigeon2 = self.getRigeon().divideRigeonVertically()
+
 		
-		rigeon1,rigeon2 = self.getRigeon().divideRigeon()
+		#rigeon1,rigeon2 = self.getRigeon().divideRigeon()
 		self.setRigeon(rigeon1)
 		node.setRigeon(rigeon2)
 
@@ -53,6 +67,10 @@ class CanNode(object):
 
 	def __str__(self):
 		return "%s%s"%(self.name,self.getPoint())
+
+
+	# def getVHPoint(self):
+	# 	return self.getPoint().getVH(1).adjust(10)
 
 
 	def show(self):
@@ -86,13 +104,3 @@ class CanNode(object):
 			print('.   ',end='')
 
 		print('\n')
-
-	def getVHPoint(self):
-		return self.getPoint().getVH(1).adjust(10)
-
-	def load(self,view):
-		self.getRigeon().load(view)
-		VHNodePoint = self.getVHPoint()
-		nodeview = '%s%s'%('.',self,)
-		view[VHNodePoint.i][VHNodePoint.j] = nodeview 
-		#view[VHNodePoint.i][VHNodePoint.j] = "."

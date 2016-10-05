@@ -1,7 +1,9 @@
 # Author: Md Lutfar Rahman
 # Phd in CS, University of Memphis
 
+from __future__ import print_function
 from VHPoint import VHPoint
+import math
 
 class Point(object):
 	"""docstring for Point"""

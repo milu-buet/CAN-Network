@@ -32,6 +32,9 @@ class Rigeon(object):
 		return True
 
 	def divideRigeon(self):
+
+		vertical_line,horizontal_line = self.getLineLength()
+
 		if randint(0,1) == 0:
 			return self.divideRigeonVertically()
 		return self.divideRigeonHorizontally()
@@ -62,44 +65,4 @@ class Rigeon(object):
 
 		return vertical_line,horizontal_line
 
-	def loadLine(self,view,point1,point2):
-		point1 = point1.getVH(1).adjust(10)
-		point2 = point2.getVH(1).adjust(10)
-		#print(point1.i,point1.j,point2.i,point2.j)
-		
-		if point1.i == point2.i and point1.i<10:
-			
-			if point1.j <= point2.j:
-				for k in range(point1.j,point2.j+1):
-					if k<10:
-						view[point1.i][k] = '.'
-			else:
-				for k in range(point2.j,point2.j+1):
-					if k<10:
-						view[point1.i][k] = '.'
-				
-
-		if point1.j == point2.j and point1.j<10:
- 
- 			if point1.i <= point2.i:
-				for k in range(point1.i,point2.i+1):
-					if k<10:
-						view[k][point1.j] = '.'
-
-			else:
-				for k in range(point2.i,point1.i+1):
-					if k<10:
-						view[k][point1.j] = '.'				
-				
-
-	def load(self,view):
-		point1 = self.point1
-		point2 = self.point2
-		point3 = Point(self.point2.x,self.point1.y)
-		point4 = Point(self.point1.x,self.point2.y)
-
-		self.loadLine(view,point1,point3)
-		self.loadLine(view,point3,point2)
-		self.loadLine(view,point4,point2)
-		self.loadLine(view,point1,point4)
 		

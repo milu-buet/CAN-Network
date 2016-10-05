@@ -27,7 +27,7 @@ def run_prog():
 	#CAN.showNodes()
 
 	print("Current CAN")
-	CAN.showCAN2()
+	CAN.show()
 	
 	while(True):
 	
@@ -43,7 +43,7 @@ def run_prog():
 		else:
 			break
 
-		CAN.showCAN2()
+		CAN.show()
 
 run_prog()
 		
