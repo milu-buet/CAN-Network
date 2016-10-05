@@ -36,7 +36,6 @@ class CanView(object):
 		for i in range(0,11):
 			for j in range(0,11):
 				print("%s "% (self.view[i][j],),end='')
-				
 			if i==10:	
 				print("(1,0)",end='')	
 			if i==0:
@@ -45,12 +44,12 @@ class CanView(object):
 				print("")
 		print("\n(0,0)")
 
-
 	def loadView(self):
 		
 		for node in self.CanNetwork.nodes:
 			self.loadNode(node)
-			print(node.getPoint(),self.getVhPoint(node))
+			#print(node.getPoint(),self.getVhPoint(node))
+			print(node)
 
 	def loadNode(self,node):
 
@@ -61,7 +60,6 @@ class CanView(object):
 
 	def loadRigeon(self,rigeon):
 		
-
 		point1 = rigeon.point1
 		point2 = rigeon.point2
 		point3 = Point(rigeon.point2.x,rigeon.point1.y)
@@ -72,14 +70,11 @@ class CanView(object):
 		self.loadLine(point4,point2)
 		self.loadLine(point1,point4)
 
-
 	def loadLine(self,point1,point2):
 		point1 = point1.getVH(1).adjust(10)
 		point2 = point2.getVH(1).adjust(10)
 		#print(point1.i,point1.j,point2.i,point2.j)
-
 		view = self.view
-		
 		if point1.i == point2.i and point1.i<10:
 			
 			if point1.j <= point2.j:

@@ -10,9 +10,6 @@ class VHPoint(object):
 		self.i = i
 		self.j = j
 
-	def Draw(self,view,char):
-		view[i][j] = char
-
 	def adjust(self,dim):
 		self.i = int(math.ceil(dim*self.i))
 		self.j = int(math.ceil(dim*self.j))

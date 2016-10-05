@@ -14,17 +14,16 @@ print('Initializing....')
 def run_prog():
 
 	s = ''' 
-	Action on CAN?
-	1. Add node
-	2. Delete node
-	3. Reset CAN
-	4. Exit
-	Choice(1/2/3/4)?:
+Action on CAN?
+1. Add node
+2. Delete node
+3. Reset CAN
+4. Exit
+Choice(1/2/3/4)?:
 		'''
 
 	CAN = CanNetwork()
 	CAN.createSampleCAN()
-	#CAN.showNodes()
 
 	print("Current CAN")
 	CAN.show()
@@ -34,15 +33,17 @@ def run_prog():
 		print(s)
 		x = int(input(""))
 		if x == 1:
-			name = input("New node name(example:'q')=")
+			name = input("New node name?(example:'q')=")
 			CAN.addNode(name)
 		elif x==2:
-			pass
+			name = input("Node to delete?(example:'q')=")
+			CAN.deletNode(name)
 		elif x==3:
-			pass
+			CAN.reset()
 		else:
 			break
 
+		print("Current CAN")
 		CAN.show()
 
 run_prog()

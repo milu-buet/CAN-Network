@@ -12,7 +12,8 @@ class CanNode(object):
 	"""docstring for CanNode"""
 	def __init__(self,name):
 		self.name = name
-		self.neighbours = []
+		self.children = []
+		self.parent = None
 	def getname(self):
 		return self.name
 	def setRigeon(self,rigeon):
@@ -29,15 +30,21 @@ class CanNode(object):
 	def getPoint(self):
 		return self.point
 
-	def addNeighbour(self,node):
-		self.neighbours.append(node)
+	def addChildren(self,node):
+		self.children.append(node)
 
-	def removeNeighbour(self,node):
-		self.neighbours.remove(node)
+	def removeChildren(self,node):
+		self.children.remove(node)
 
-	def showNeighbour(self):
-		for node in self.neighbours:
+	def showChildren(self):
+		for node in self.children:
 			print(node)
+
+	def setParent(self,node):
+		self.parent = node
+
+	def getParent(self):
+		return self.parent 
 
 	def insertNode(self,node):
 
@@ -59,8 +66,8 @@ class CanNode(object):
 		self.setRigeon(rigeon1)
 		node.setRigeon(rigeon2)
 
-		self.addNeighbour(node)
-		node.addNeighbour(self)
+		self.addChildren(node)
+		node.addParent(self)
 
 		return self,node
 
