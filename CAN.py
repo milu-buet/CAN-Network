@@ -23,7 +23,6 @@ Choice(1/2/3/4)?:
 		'''
 
 	CAN = CanNetwork()
-	CAN.createSampleCAN()
 
 	print("Current CAN")
 	CAN.show()

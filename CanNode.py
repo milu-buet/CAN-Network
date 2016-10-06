@@ -14,6 +14,7 @@ class CanNode(object):
 		self.name = name
 		self.children = []
 		self.parent = None
+		self.starting_rigeon = None
 	def getname(self):
 		return self.name
 	def setRigeon(self,rigeon):
@@ -23,6 +24,12 @@ class CanNode(object):
 
 	def getRigeon(self):
 		return self.rigeon
+
+	def setStaringRigeon(self,rigeon):
+		self.starting_rigeon = rigeon
+
+	def getStartingRigeon():
+		return self.starting_rigeon
 
 	def setPoint(self,point):
 		self.point = point
@@ -40,7 +47,7 @@ class CanNode(object):
 		for node in self.children:
 			print(node)
 
-	def setParent(self,node):
+	def addParent(self,node):
 		self.parent = node
 
 	def getParent(self):
@@ -65,6 +72,7 @@ class CanNode(object):
 		#rigeon1,rigeon2 = self.getRigeon().divideRigeon()
 		self.setRigeon(rigeon1)
 		node.setRigeon(rigeon2)
+		node.setStaringRigeon(rigeon2)
 
 		self.addChildren(node)
 		node.addParent(self)

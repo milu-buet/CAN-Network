@@ -25,6 +25,7 @@ class CanNetwork(object):
 		TotalRigeon = Rigeon(point1,point2)
 		a_node = CanNode('p')
 		a_node.setRigeon(TotalRigeon)
+		a_node.setStaringRigeon(TotalRigeon)
 		self.registerNode(a_node)
 
 	def reset(self):
@@ -42,6 +43,8 @@ class CanNetwork(object):
 		
 		node = self.node_dict[name]
 		parent_node = node.getParent()
+
+
 
 	def registerNode(self,node):
 		self.nodes.append(node)

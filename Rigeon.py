@@ -31,6 +31,9 @@ class Rigeon(object):
 			return False
 		return True
 
+	def doesRegionTouch(self,rigeon):
+		return IsPointInTheRigeon(rigeon.point1) or IsPointInTheRigeon(rigeon.point2)
+
 	def divideRigeon(self):
 
 		vertical_line,horizontal_line = self.getLineLength()
@@ -57,12 +60,36 @@ class Rigeon(object):
 		return Rigeon(self.point1,point4),Rigeon(point3,self.point2)
 
 	def getCommonLine(self,rigeon):
-		pass
+		
+		if self.point1.x == rigeon.point1.x:
+			pass
+		elif self.point1.y == self.point2.y:
+			pass
+
+		return None
 
 	def getLineLength(self):
 		vertical_line = int(10*(self.point2.x - self.point1.x))
 		horizontal_line = int(10*(self.point2.y - self.point1.y))
 
 		return vertical_line,horizontal_line
+
+	def mergedRigeon(self,rigeon):
+
+		point1 = None
+		point2 = None
+
+		if self.point1.x < rigeon.point1.x or self.point1.y < rigeon.point1.y:
+			point1 = self.point1
+			point2 = rigeon.point2
+		elif self.point1.x > rigeon.point1.x or self.point1.y > rigeon.point1.y:
+			point1 = self.point2
+			point2 = rigeon.point1
+		else :
+			pass
+			#identical rigeon
+			return self
+
+		return Rigeon(point1,point2)
 
 		
