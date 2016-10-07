@@ -31,6 +31,18 @@ class Rigeon(object):
 			return False
 		return True
 
+	def getP1(self):
+		return self.point1
+	
+	def getP2(self):
+		return Point(self.point2.x,self.point1.y)
+	
+	def getP3(self):
+		return self.point2
+
+	def getP4(self):
+		return Point(self.point1.x,self.point2.y)
+
 	def doesRegionTouch(self,rigeon):
 		return IsPointInTheRigeon(rigeon.point1) or IsPointInTheRigeon(rigeon.point2)
 
@@ -59,14 +71,30 @@ class Rigeon(object):
 
 		return Rigeon(self.point1,point4),Rigeon(point3,self.point2)
 
-	def getCommonLine(self,rigeon):
+	def getCompleteCommonLine(self,rigeon):
 		
-		if self.point1.x == rigeon.point1.x:
+		if self.point2.x == rigeon.point1.x and self.point1.y == rigeon.point1.y:
 			pass
 		elif self.point1.y == self.point2.y:
 			pass
 
 		return None
+
+	def hasCompleteCommonLine(self,rigeon):
+
+		if self.getP2() == rigeon.getP1() and self.getP3() == rigeon.getP4():
+			return True
+
+		if rigeon.getP2() == self.getP1() and rigeon.getP3() == self.getP4():
+			return True
+
+		if self.getP4() == rigeon.getP1() and self.getP3() == rigeon.getP2():
+			return True
+
+		if rigeon.getP4() == self.getP1() and rigeon.getP3() == self.getP2():
+			return True
+
+		return False
 
 	def getLineLength(self):
 		vertical_line = int(10*(self.point2.x - self.point1.x))
@@ -74,7 +102,9 @@ class Rigeon(object):
 
 		return vertical_line,horizontal_line
 
-	def mergedRigeon(self,rigeon):
+	def mergeRigeon(self,rigeon):
+
+		#if it is true that two has complete common line
 
 		point1 = None
 		point2 = None
@@ -83,8 +113,8 @@ class Rigeon(object):
 			point1 = self.point1
 			point2 = rigeon.point2
 		elif self.point1.x > rigeon.point1.x or self.point1.y > rigeon.point1.y:
-			point1 = self.point2
-			point2 = rigeon.point1
+			point1 =  rigeon.point1
+			point2 =  self.point2
 		else :
 			pass
 			#identical rigeon

@@ -44,11 +44,49 @@ class CanNetwork(object):
 		node = self.node_dict[name]
 		parent_node = node.getParent()
 
+		if len(node.getChildren()) > 0:
+			#find one children with complete common line, merge to it
+			for child in node.getChildren():
+				if node.getRigeon().hasCompleteCommonLine(child.getRigeon()):
+					new_rigeon = node.getRigeon().mergeRigeon(child.getRigeon())  #merge rigeon
+					#print("Common Line found with node = %s, rigeon = %s"% (child,new_rigeon))
+					
+					child.setRigeon(new_rigeon)
+					child.adoptParentsChildrenAndRole() #and fix parent relation
+					self.unregisterNode(node)
+					
+					return True
+
+			#no children with complete common line?
+			#there will be at least one children with complete common line, mamla dismiss
+
+		elif parent_node != None:
+			#if complete common line exists, merge to parent
+			#else things are critical
+			if node.getRigeon().hasCompleteCommonLine(parent_node.getRigeon()):
+				
+				new_rigeon = node.getRigeon().mergeRigeon(parent_node.getRigeon())
+				parent_node.setRigeon(new_rigeon)
+
+				self.unregisterNode(node)
+				return True
+			else:
+				pass # this is the shitty case
+
+				
+		else:
+			pass # Nothing to delete, only one node available here 
+
 
 
 	def registerNode(self,node):
 		self.nodes.append(node)
 		self.node_dict[node.name] = node
+
+	def unregisterNode(self,node):
+
+		self.nodes.remove(node)
+		self.node_dict[node.name] = None
 
 	def showNodes(self):
 		for node in self.nodes:

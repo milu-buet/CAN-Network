@@ -43,6 +43,9 @@ class CanNode(object):
 	def removeChildren(self,node):
 		self.children.remove(node)
 
+	def getChildren(self):
+		return self.children
+
 	def showChildren(self):
 		for node in self.children:
 			print(node)
@@ -52,6 +55,16 @@ class CanNode(object):
 
 	def getParent(self):
 		return self.parent 
+
+	def adoptParentsChildrenAndRole(self):
+		if self.parent != None:
+			for child in self.parent.getChildren():
+				if self != child:
+					self.addChildren(child)
+					child.addParent(self)
+
+			self.parent = self.parent.parent
+
 
 	def insertNode(self,node):
 
