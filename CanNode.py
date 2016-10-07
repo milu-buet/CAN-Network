@@ -56,6 +56,20 @@ class CanNode(object):
 	def getParent(self):
 		return self.parent 
 
+	def getAllLowerLevelNode(self):
+
+		if len(self.getChildren()) == 0:
+			return []
+
+		AllLowerLevel = []
+
+		for child in self.getChildren():
+			AllLowerLevel.append(child)
+			AllLowerLevel = AllLowerLevel + child.getAllLowerLevelNode()
+
+		return AllLowerLevel
+
+
 	def adoptParentsChildrenAndRole(self):
 		if self.parent != None:
 			for sibling in self.parent.getChildren():

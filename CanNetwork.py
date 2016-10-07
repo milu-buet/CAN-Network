@@ -68,8 +68,16 @@ class CanNetwork(object):
 
 
 			#no children with complete common line?
-			#there will be at least one children with complete common line, mamla dismiss
 			print('this case should not exist!!!')
+			print('Entered in streching mode 1')
+
+
+			for child in node.getAllLowerLevelNode():
+				child.getRigeon().strechRigeon(node.getStartingRigeon(),node.getRigeon())
+
+			self.unregisterNode(node)
+
+
 
 		elif parent_node != None:
 			#if complete common line exists, merge to parent
@@ -84,10 +92,12 @@ class CanNetwork(object):
 			else:
 				pass # this is the shitty case
 				#find if any sibling has complete common line
-				print('Entered in streching mode')
+				
 				for sibling in parent_node.getChildren():
 					if sibling.name != node.name:
 						if node.getRigeon().hasCompleteCommonLine(sibling.getRigeon()):
+
+							print("sibling found = %s" %(sibling,))
 
 							new_rigeon = node.getRigeon().mergeRigeon(sibling.getRigeon())
 							sibling.setRigeon(new_rigeon)
@@ -97,9 +107,11 @@ class CanNetwork(object):
 
 				# I'm fucked up here
 				# try streching style
+				print('Entered in streching mode 2')
 
 				parent_node.getRigeon().strechRigeon(parent_node.getStartingRigeon(),node.getRigeon())
-				for sibling in parent_node.getChildren():
+
+				for sibling in parent_node.getAllLowerLevelNode():
 					if sibling.name != node.name:
 						sibling.getRigeon().strechRigeon(parent_node.getStartingRigeon(),node.getRigeon())
 

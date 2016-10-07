@@ -49,7 +49,7 @@ class CanView(object):
 		for node in self.CanNetwork.nodes:
 			self.loadNode(node)
 			#print(node.getPoint(),self.getVhPoint(node))
-			print(node)
+			print(node,node.getRigeon())
 
 	def loadNode(self,node):
 

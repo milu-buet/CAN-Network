@@ -132,14 +132,14 @@ class Rigeon(object):
 		if reference.getP1() == target.getP1():
 			mult = 0.5
 			if reference.getP4() == target.getP4():
-				direct = 'x'
+				direc = 'x'
 			elif reference.getP2() == target.getP2():
 				direc = 'y'
 
 		elif reference.getP3() == target.getP3():
 			mult = 2
 			if reference.getP2() == target.getP2():
-				direct = 'x'
+				direc = 'x'
 			elif reference.getP4() == target.getP4():
 				direc = 'y' 
 
@@ -152,6 +152,7 @@ class Rigeon(object):
 	def strechRigeon(self,reference,target):
 
 		mult,direc = self.getStrechDirection(reference,target)
+		print(mult,direc)
 
 		A = self.getP1() == reference.getP1()  
 		B = self.getP2() == reference.getP2()
@@ -172,6 +173,17 @@ class Rigeon(object):
 
 		else:
 			pass # worst situation
+			print('worst case of strechign ....')
+
+			if direc == 'x':
+				self.point1.x = round(mult*self.point1.x)
+				self.point2.x = round(mult*self.point2.x)
+			elif direc == 'y':
+				self.point1.y = round(mult*self.point1.y)
+				self.point2.y = round(mult*self.point2.y)
+
+
+		self.node.setPoint(self.getMidlePoint()) 
 
 
 
