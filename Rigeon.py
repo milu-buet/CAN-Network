@@ -162,25 +162,25 @@ class Rigeon(object):
 		if A or B or C or D:
 			if direc == 'x':
 				if mult < 1:
-					self.point1.x = round(mult*self.point1.x)
+					self.point1.x = round(mult*self.point1.x,1)
 				else:
-					self.point2.x = round(mult*self.point2.x)
+					self.point2.x = round(mult*self.point2.x,1)
 			elif direc == 'y':
 				if mult < 1:
-					self.point1.y = round(mult*self.point1.y)
+					self.point1.y = round(mult*self.point1.y,1)
 				else:
-					self.point2.y = round(mult*self.point2.y)
+					self.point2.y = round(mult*self.point2.y,1)
 
 		else:
 			pass # worst situation
 			print('worst case of strechign ....')
 
 			if direc == 'x':
-				self.point1.x = round(mult*self.point1.x)
-				self.point2.x = round(mult*self.point2.x)
+				self.point1.x = round(mult*self.point1.x,1)
+				self.point2.x = round(mult*self.point2.x,1)
 			elif direc == 'y':
-				self.point1.y = round(mult*self.point1.y)
-				self.point2.y = round(mult*self.point2.y)
+				self.point1.y = round(mult*self.point1.y,1)
+				self.point2.y = round(mult*self.point2.y,1)
 
 
 		self.node.setPoint(self.getMidlePoint()) 
