@@ -80,6 +80,8 @@ class Rigeon(object):
 
 		return None
 
+
+
 	def hasCompleteCommonLine(self,rigeon):
 
 		if self.getP2() == rigeon.getP1() and self.getP3() == rigeon.getP4():
@@ -121,5 +123,56 @@ class Rigeon(object):
 			return self
 
 		return Rigeon(point1,point2)
+
+	def getStrechDirection(self,reference,target):
+		
+		mult = 1.0
+		direc = None
+
+		if reference.getP1() == target.getP1():
+			mult = 0.5
+			if reference.getP4() == target.getP4():
+				direct = 'x'
+			elif reference.getP2() == target.getP2():
+				direc = 'y'
+
+		elif reference.getP3() == target.getP3():
+			mult = 2
+			if reference.getP2() == target.getP2():
+				direct = 'x'
+			elif reference.getP4() == target.getP4():
+				direc = 'y' 
+
+
+
+		return mult,direc
+
+
+
+	def strechRigeon(self,reference,target):
+
+		mult,direc = self.getStrechDirection(reference,target)
+
+		A = self.getP1() == reference.getP1()  
+		B = self.getP2() == reference.getP2()
+		C = self.getP3() == reference.getP3() 
+		D = self.getP4() == reference.getP4()
+
+		if A or B or C or D:
+			if direc == 'x':
+				if mult < 1:
+					self.point1.x = round(mult*self.point1.x)
+				else:
+					self.point2.x = round(mult*self.point2.x)
+			elif direc == 'y':
+				if mult < 1:
+					self.point1.y = round(mult*self.point1.y)
+				else:
+					self.point2.y = round(mult*self.point2.y)
+
+		else:
+			pass # worst situation
+
+
 
 		

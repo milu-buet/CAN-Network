@@ -28,7 +28,7 @@ class CanNode(object):
 	def setStaringRigeon(self,rigeon):
 		self.starting_rigeon = rigeon
 
-	def getStartingRigeon():
+	def getStartingRigeon(self):
 		return self.starting_rigeon
 
 	def setPoint(self,point):
@@ -59,7 +59,7 @@ class CanNode(object):
 	def adoptParentsChildrenAndRole(self):
 		if self.parent != None:
 			for sibling in self.parent.getChildren():
-				if self != sibling:
+				if self.name != sibling.name:
 					self.addChildren(sibling)
 					sibling.addParent(self)
 

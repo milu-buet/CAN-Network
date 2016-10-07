@@ -66,8 +66,10 @@ class CanNetwork(object):
 					
 					return True
 
+
 			#no children with complete common line?
 			#there will be at least one children with complete common line, mamla dismiss
+			print('this case should not exist!!!')
 
 		elif parent_node != None:
 			#if complete common line exists, merge to parent
@@ -93,6 +95,15 @@ class CanNetwork(object):
 
 
 				# I'm fucked up here
+				# try streching style
+
+				parent_node.getRigeon().strechRigeon(parent_node.getStartingRigeon(),node.getRigeon())
+				for sibling in parent_node.getChildren():
+					if sibling.name != node.name:
+						sibling.getRigeon().strechRigeon(parent_node.getStartingRigeon(),node.getRigeon())
+
+				self.unregisterNode(node)
+
 
 
 		else:
