@@ -84,6 +84,7 @@ class CanNetwork(object):
 			else:
 				pass # this is the shitty case
 				#find if any sibling has complete common line
+				print('Entered in streching mode')
 				for sibling in parent_node.getChildren():
 					if sibling.name != node.name:
 						if node.getRigeon().hasCompleteCommonLine(sibling.getRigeon()):
