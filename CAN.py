@@ -33,7 +33,13 @@ Choice(1/2/3/4)?:
 		x = int(input(""))
 		if x == 1:
 			name = input("New node name?(example:'q')=")
-			CAN.addNode(name)
+			result = CAN.addNode(name)
+
+			if result:
+				pass #node added successfully
+			else:
+				print('DUPLICATE NAME ERROR')
+
 		elif x==2:
 			name = input("Node to delete?(example:'q')=")
 			CAN.deletNode(name)

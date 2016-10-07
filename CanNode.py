@@ -58,12 +58,14 @@ class CanNode(object):
 
 	def adoptParentsChildrenAndRole(self):
 		if self.parent != None:
-			for child in self.parent.getChildren():
-				if self != child:
-					self.addChildren(child)
-					child.addParent(self)
+			for sibling in self.parent.getChildren():
+				if self != sibling:
+					self.addChildren(sibling)
+					sibling.addParent(self)
 
 			self.parent = self.parent.parent
+
+
 
 
 	def insertNode(self,node):

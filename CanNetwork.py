@@ -32,11 +32,20 @@ class CanNetwork(object):
 		self.__init__()
 
 	def addNode(self,name):
+
+		try:
+			if self.node_dict[name]:
+				return False
+		except:
+			pass
+
 		a_node = CanNode(name)
 		r_node = self.nodes[randint(0,len(self.nodes)-1) ]
 
 		r_node.insertNode(a_node)
 		self.registerNode(a_node)
+
+		return True
 
 
 	def deletNode(self,name):
@@ -72,8 +81,20 @@ class CanNetwork(object):
 				return True
 			else:
 				pass # this is the shitty case
+				#find if any sibling has complete common line
+				for sibling in parent_node.getChildren():
+					if sibling.name != node.name:
+						if node.getRigeon().hasCompleteCommonLine(sibling.getRigeon()):
 
-				
+							new_rigeon = node.getRigeon().mergeRigeon(sibling.getRigeon())
+							sibling.setRigeon(new_rigeon)
+							self.unregisterNode(node)
+							return True
+
+
+				# I'm fucked up here
+
+
 		else:
 			pass # Nothing to delete, only one node available here 
 
@@ -87,6 +108,9 @@ class CanNetwork(object):
 
 		self.nodes.remove(node)
 		self.node_dict[node.name] = None
+
+		if node.getParent():
+			node.getParent().removeChildren(node)
 
 	def showNodes(self):
 		for node in self.nodes:
