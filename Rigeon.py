@@ -82,6 +82,36 @@ class Rigeon(object):
 
 
 
+	def hasAnyCommonLine(self,rigeon):
+
+		A = rigeon.point1.x >= self.point1.x and rigeon.point1.x <= self.point2.x   #in between x-axis
+		B = rigeon.point2.x >= self.point1.x and rigeon.point2.x <= self.point2.x
+
+		C = rigeon.point1.y == self.point2.y
+		D = rigeon.point2.y == self.point1.y
+
+		if A and B and C:
+			return True
+		elif A and B and D:
+			return True
+
+
+
+		A = rigeon.point1.y >= self.point1.y and rigeon.point1.y <= self.point2.y  #in between y-axis
+		B = rigeon.point2.y >= self.point1.y and rigeon.point2.y <= self.point2.y
+
+		C = rigeon.point1.x == self.point2.x
+		D = rigeon.point2.x == self.point1.x
+
+		if A and B and C:
+			return True
+		elif A and B and D:
+			return True
+
+
+		return False
+
+
 	def hasCompleteCommonLine(self,rigeon):
 
 		if self.getP2() == rigeon.getP1() and self.getP3() == rigeon.getP4():
@@ -159,17 +189,17 @@ class Rigeon(object):
 		C = self.getP3() == reference.getP3() 
 		D = self.getP4() == reference.getP4()
 
-		if A or B or C or D:
+		if A or B or C or D or True:
 			if direc == 'x':
 				if mult < 1:
-					self.point1.x = round(mult*self.point1.x,1)
+					self.point1.x = reference.point1.x
 				else:
-					self.point2.x = round(mult*self.point2.x,1)
+					self.point2.x = reference.point2.x
 			elif direc == 'y':
 				if mult < 1:
-					self.point1.y = round(mult*self.point1.y,1)
+					self.point1.y = reference.point1.y
 				else:
-					self.point2.y = round(mult*self.point2.y,1)
+					self.point2.y = reference.point2.y
 
 		else:
 			pass # worst situation

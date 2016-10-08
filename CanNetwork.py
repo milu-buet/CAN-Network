@@ -73,8 +73,13 @@ class CanNetwork(object):
 
 
 			for child in node.getAllLowerLevelNode():
-				child.getRigeon().strechRigeon(node.getStartingRigeon(),node.getRigeon())
+				if node.getRigeon().hasAnyCommonLine(child.getRigeon()):
+					print('>>')
+					print(child)
+					child.getRigeon().strechRigeon(node.getStartingRigeon(),node.getRigeon())
 
+
+			node.getChildren()[0].adoptParentsChildrenAndRole()
 			self.unregisterNode(node)
 
 
@@ -109,11 +114,17 @@ class CanNetwork(object):
 				# try streching style
 				print('Entered in streching mode 2')
 
-				parent_node.getRigeon().strechRigeon(parent_node.getStartingRigeon(),node.getRigeon())
+				if node.getRigeon().hasAnyCommonLine(parent_node.getRigeon()):
+					print('>>')
+					print(parent_node)
+					parent_node.getRigeon().strechRigeon(parent_node.getStartingRigeon(),node.getRigeon())
 
 				for sibling in parent_node.getAllLowerLevelNode():
 					if sibling.name != node.name:
-						sibling.getRigeon().strechRigeon(parent_node.getStartingRigeon(),node.getRigeon())
+						if node.getRigeon().hasAnyCommonLine(sibling.getRigeon()):
+							print('>>')
+							print(sibling)
+							sibling.getRigeon().strechRigeon(parent_node.getStartingRigeon(),node.getRigeon())
 
 				self.unregisterNode(node)
 

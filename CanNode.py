@@ -77,9 +77,10 @@ class CanNode(object):
 					self.addChildren(sibling)
 					sibling.addParent(self)
 
-			self.parent = self.parent.parent
+			
 
-		self.setStaringRigeon(parent.getStartingRigeon())
+			self.setStaringRigeon(self.parent.getStartingRigeon())
+			self.parent = self.parent.parent
 
 
 
