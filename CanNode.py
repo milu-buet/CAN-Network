@@ -79,6 +79,8 @@ class CanNode(object):
 
 			self.parent = self.parent.parent
 
+		self.setStaringRigeon(parent.getStartingRigeon())
+
 
 
 
