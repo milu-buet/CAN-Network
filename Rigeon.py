@@ -185,19 +185,33 @@ class Rigeon(object):
 		mult,direc = self.getStrechDirection(target)
 		print(mult,direc)
 
+		vertical_line,horizontal_line = self.getLineLength()
+		consumed_area = 0
+
 		if direc == 'x':
 			if mult < 1:
+				consumed_area = vertical_line * int(10*abs(target.point1.x - self.point1.x))
 				self.point1.x = target.point1.x
 			else:
+				consumed_area = vertical_line * int(10*abs(target.point2.x - self.point2.x))
 				self.point2.x = target.point2.x
 		elif direc == 'y':
 			if mult < 1:
+				consumed_area = horizontal_line * int(10*abs(target.point1.y - self.point1.y))
 				self.point1.y = target.point1.y
 			else:
+				consumed_area = horizontal_line * int(10*abs(target.point2.y - self.point2.y))
 				self.point2.y = target.point2.y
 
 
 		self.node.setPoint(self.getMidlePoint()) 
+
+		return consumed_area
+
+	def getArea(self):
+		vertical_line,horizontal_line = self.getLineLength()
+
+		return vertical_line*horizontal_line
 
 
 

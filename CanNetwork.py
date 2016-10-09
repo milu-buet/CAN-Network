@@ -74,13 +74,15 @@ class CanNetwork(object):
 			print('this case should not exist!!!')
 			print('Entered in streching mode 1')
 
+			left_area = node.getRigeon().getArea()
 
 			#for child in node.getAllLowerLevelNode():
 			for child in self.nodes:
 				if child.name != node.name and node.getRigeon().hasAnyCommonLine(child.getRigeon()):
 					print('>>')
 					print(child)
-					child.getRigeon().strechRigeon(node.getRigeon())
+					con_area = child.getRigeon().strechRigeon(node.getRigeon())
+					left_area = left_area - con_area
 
 
 			node.getChildren()[0].adoptParentsChildrenAndRole()
@@ -117,6 +119,7 @@ class CanNetwork(object):
 				# I'm fucked up here
 				# try streching style
 				print('Entered in streching mode 2')
+				left_area = node.getRigeon().getArea()
 
 				if node.getRigeon().hasAnyCommonLine(parent_node.getRigeon()):
 					print('>>')
@@ -129,13 +132,15 @@ class CanNetwork(object):
 						if node.getRigeon().hasAnyCommonLine(sibling.getRigeon()):
 							print('>>')
 							print(sibling)
-							sibling.getRigeon().strechRigeon(node.getRigeon())
+							con_area = sibling.getRigeon().strechRigeon(node.getRigeon())
+							left_area = left_area - con_area
 
 				self.unregisterNode(node)
 
 
 
 		else:
+			print('node has no Child or Parent')
 			pass # Nothing to delete, only one node available here 
 
 
