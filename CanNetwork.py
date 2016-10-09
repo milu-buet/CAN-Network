@@ -179,7 +179,7 @@ class CanNetwork(object):
 			if node.name != fromNode.name:
 				return route + self.findRoute(node,toNode)
 
-		while(start.x > end.x and start.x <= 1.0):
+		while(start.x > end.x and start.x >= 0.0):
 			start.x  = start.x - 0.1
 			node = self.lookUpNode(start.x,start.y)
 			if node.name == toNode.name:
@@ -201,7 +201,7 @@ class CanNetwork(object):
 				return route + self.findRoute(node,toNode)
 
 
-		while(start.y > end.y and start.y <= 1.0):
+		while(start.y > end.y and start.y >= 0.0):
 			start.y  = start.y - 0.1
 			node = self.lookUpNode(start.x,start.y)
 			if node.name == toNode.name:

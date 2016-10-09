@@ -58,7 +58,7 @@ Choice(1/2/3/4)?:
 
 width = 500
 height = 500
-console_mode = True
+console_mode = False
 
 try:  # import as appropriate for 2.x vs. 3.x
    from tkinter import *

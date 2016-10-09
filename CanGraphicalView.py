@@ -74,21 +74,25 @@ class CanGraphicalView(object):
 		margin = self.margin
 
 		self.addNodeTextBox = Entry(self.win)
+		self.addNodeTextBox.insert(0,"New node name")
 		self.addNodeTextBox.place(x=50,y=380)
 
 		self.addNodeButton = Button(self.win, text="Add Node", command=self.addNodeButtonAction)
 		self.addNodeButton.place(x=90,y=405)
 
 		self.deleteNodeTextBox = Entry(self.win)
+		self.deleteNodeTextBox.insert(0,"Node to delete")
 		self.deleteNodeTextBox.place(x=260,y=380)
 
 		self.deleteNodeButton = Button(self.win, text="Delete Node", command=self.deleteNodeButtonAction)
 		self.deleteNodeButton.place(x=300,y=405)
 
 		self.rP1NodeTextBox = Entry(self.win)
+		#self.rP1NodeTextBox.insert(0,"start")
 		self.rP1NodeTextBox.place(x=50,y=440)
 
 		self.rP2NodeTextBox = Entry(self.win)
+		#self.rP2NodeTextBox.insert(0,"end")
 		self.rP2NodeTextBox.place(x=260,y=440)
 
 		self.rButton = Button(self.win, text="Show Route", command=self.ShowRouteAction)
