@@ -23,6 +23,9 @@ class Point(object):
 	def getVHG(self,dim):
 		return VHPoint(self.x,dim-self.y)
 
+	def clone(self):
+		return Point(self.x,self.y)
+
 	def __str__(self):
 		return "(%s,%s)" % (self.x,self.y)
 

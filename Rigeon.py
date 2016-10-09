@@ -73,13 +73,13 @@ class Rigeon(object):
 
 	def getCompleteCommonLine(self,rigeon):
 		
-		if self.point2.x == rigeon.point1.x and self.point1.y == rigeon.point1.y:
-			pass
-		elif self.point1.y == self.point2.y:
-			pass
+		# if self.point2.x == rigeon.point1.x and self.point1.y == rigeon.point1.y:
+		# 	pass
+		# elif self.point1.y == self.point2.y:
+		# 	pass
 
-		return None
-
+		# return None
+		pass
 
 
 	def hasAnyCommonLine(self,rigeon):

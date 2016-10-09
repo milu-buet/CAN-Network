@@ -162,6 +162,38 @@ class CanNetwork(object):
 			print('node has no Child or Parent')
 			pass # Nothing to delete, only one node available here 
 
+	def findRoute(self,fromNode,toNode):
+
+		route = [fromNode,]
+		start = fromNode.getPoint().clone()
+		end = toNode.getPoint().clone()
+
+
+		while(start.x < end.x and start.x <= 1.0):
+			start.x  = start.x + 0.1
+			node = self.lookUpNode(start.x,start.y)
+			if node.name == toNode.name:
+				route.append(toNode)
+				return route
+
+			if node.name != fromNode.name:
+				return route + self.findRoute(node,toNode)
+
+
+		while(start.y < end.y and start.y <= 1.0):
+			start.y  = start.y + 0.1
+			node = self.lookUpNode(start.x,start.y)
+			if node.name == toNode.name:
+				route.append(toNode)
+				return route
+
+			if node.name != fromNode.name:
+				return route + self.findRoute(node,toNode)
+
+
+		print("This should not happen, There is always route")
+		return None
+
 
 
 	def registerNode(self,node):

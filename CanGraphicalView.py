@@ -79,12 +79,43 @@ class CanGraphicalView(object):
 		self.addNodeButton = Button(self.win, text="Add Node", command=self.addNodeButtonAction)
 		self.addNodeButton.place(x=90,y=405)
 
-
 		self.deleteNodeTextBox = Entry(self.win)
 		self.deleteNodeTextBox.place(x=260,y=380)
 
 		self.deleteNodeButton = Button(self.win, text="Delete Node", command=self.deleteNodeButtonAction)
 		self.deleteNodeButton.place(x=300,y=405)
+
+		self.rP1NodeTextBox = Entry(self.win)
+		self.rP1NodeTextBox.place(x=50,y=440)
+
+		self.rP2NodeTextBox = Entry(self.win)
+		self.rP2NodeTextBox.place(x=260,y=440)
+
+		self.rButton = Button(self.win, text="Show Route", command=self.ShowRouteAction)
+		self.rButton.place(x=180,y=465)
+
+	
+	def ShowRouteAction(self):
+		
+		p1 = self.rP1NodeTextBox.get()
+		fromNode = self.CanNetwork.node_dict[p1]
+
+		p2 = self.rP2NodeTextBox.get()
+		toNode = self.CanNetwork.node_dict[p2]
+
+		route = self.CanNetwork.findRoute(fromNode,toNode)
+
+		for i in range(0,len(route)-1):
+			self.create_line(route[i],route[i+1])
+			
+
+	def create_line(self,node1,node2):
+		p1 = node1.getPoint().getVHG(1).adjust(self.CAN_DIM).screenAdjust(self.CAN_BEGIN)
+		p2 = node2.getPoint().getVHG(1).adjust(self.CAN_DIM).screenAdjust(self.CAN_BEGIN)
+		print(p1,p2)
+		self.canvas.create_line(p1.i, p1.j, p2.i, p2.j)
+
+
 
 	def addNodeButtonAction(self):
 		print("click!")
