@@ -14,6 +14,7 @@ class CanNetwork(object):
 	"""docstring for CanNetwork"""
 	def __init__(self):
 		self.nodes = []
+		self.hashed_node = {}
 		self.node_dict = {}
 		self.OneNodeInit()
 
@@ -30,7 +31,20 @@ class CanNetwork(object):
 	def reset(self):
 		self.__init__()
 
-	def addNode(self,name):
+	def getRandomPoint(self):
+		x = round(randint(0,10)/10.0,1)
+		y = round(randint(0,10)/10.0,1)
+
+		return x,y
+
+	def lookUpNode(self,x,y):
+		p = Point(x,y)
+		for node in self.nodes:
+			if node.getRigeon().IsPointInTheRigeon(p):
+				return node
+		return None
+
+	def addNode(self,name, NodeFallsInTheRigeon = None):
 
 		try:
 			if self.node_dict[name]:
@@ -39,7 +53,12 @@ class CanNetwork(object):
 			pass
 
 		a_node = CanNode(name)
-		r_node = self.nodes[randint(0,len(self.nodes)-1) ]
+
+		if NodeFallsInTheRigeon is None:
+			r_node = self.nodes[randint(0,len(self.nodes)-1) ]   # debugging code
+
+		else:
+			r_node = NodeFallsInTheRigeon
 
 		r_node.insertNode(a_node)
 		self.registerNode(a_node)
