@@ -7,6 +7,8 @@ from VHPoint import *
 from Rigeon import *
 from CanNode import *
 from CanNetwork import *
+from CanView import *
+from CanGraphicalView import *
 
 print('Initializing....')
 
@@ -23,9 +25,10 @@ Choice(1/2/3/4)?:
 		'''
 
 	CAN = CanNetwork()
+	canview = CanView(CAN)
 
 	print("Current CAN")
-	CAN.show()
+	canview.show()
 	
 	while(True):
 	
@@ -49,10 +52,42 @@ Choice(1/2/3/4)?:
 			break
 
 		print("Current CAN")
-		CAN.show()
+		canview.show()
 
-run_prog()
-		
+#run_prog()
+
+width = 500
+height = 500
+
+try:  # import as appropriate for 2.x vs. 3.x
+   from tkinter import *
+except:
+   from Tkinter import *
+
+
+def graphical_run_prog():
+	#CAN = CanNetwork()
+	#win = GraphWin("CAN Network", width, height)
+	#m = CanGraphicalView(CAN,win,width,height)
+	#win.getMouse() # Pause to view result
+	#win.close()    # Close window when done
+
+	root = Tk() 
+	root.wm_title("CAN Network Simulation")
+	root.geometry("500x500")
+	root.resizable(width=False, height=False)
+
+	CAN = CanNetwork()
+	CanGraphicalView(CAN,root,width,height)
+
+	root.mainloop()
+	root.destroy()
+
+
+
+if __name__ == "__main__":
+	graphical_run_prog()
+	
 
 print('')
 print('Ended....')

@@ -15,6 +15,10 @@ class VHPoint(object):
 		self.j = int(math.ceil(dim*self.j))
 		return self
 
+	def screenAdjust(self,dist):
+		self.i = self.i + dist
+		return self
+
 
 	def __str__(self):
 		return "(%s,%s)" % (self.i,self.j)

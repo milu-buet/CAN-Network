@@ -13,12 +13,15 @@ class Point(object):
 
 	def __eq__(self, other):
 		if isinstance(other, Point):
-			return self.x == other.x and self.y == other.y
+			return abs(self.x - other.x) < 0.1 and abs(self.y - other.y) < 0.1
 
 		return NotImplemented
 
 	def getVH(self,dim):
 		return VHPoint(dim-self.y,self.x)
+
+	def getVHG(self,dim):
+		return VHPoint(self.x,dim-self.y)
 
 	def __str__(self):
 		return "(%s,%s)" % (self.x,self.y)

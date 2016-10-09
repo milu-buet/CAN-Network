@@ -7,6 +7,7 @@ from VHPoint import *
 from Rigeon import *
 from CanNode import *
 from CanView import *
+from CanGraphicalView import *
 
 
 class CanNetwork(object):
@@ -14,8 +15,6 @@ class CanNetwork(object):
 	def __init__(self):
 		self.nodes = []
 		self.node_dict = {}
-
-		self.canview = CanView(self)
 		self.OneNodeInit()
 
 	def OneNodeInit(self):
@@ -50,8 +49,12 @@ class CanNetwork(object):
 
 	def deletNode(self,name):
 		
-		node = self.node_dict[name]
-		parent_node = node.getParent()
+		try:
+			node = self.node_dict[name]
+			parent_node = node.getParent()
+		except:
+			print('Node deletion error!!!')
+			return False
 
 		if len(node.getChildren()) > 0:
 			#find one children with complete common line, merge to it
@@ -72,11 +75,12 @@ class CanNetwork(object):
 			print('Entered in streching mode 1')
 
 
-			for child in node.getAllLowerLevelNode():
-				if node.getRigeon().hasAnyCommonLine(child.getRigeon()):
+			#for child in node.getAllLowerLevelNode():
+			for child in self.nodes:
+				if child.name != node.name and node.getRigeon().hasAnyCommonLine(child.getRigeon()):
 					print('>>')
 					print(child)
-					child.getRigeon().strechRigeon(node.getStartingRigeon(),node.getRigeon())
+					child.getRigeon().strechRigeon(node.getRigeon())
 
 
 			node.getChildren()[0].adoptParentsChildrenAndRole()
@@ -117,14 +121,15 @@ class CanNetwork(object):
 				if node.getRigeon().hasAnyCommonLine(parent_node.getRigeon()):
 					print('>>')
 					print(parent_node)
-					parent_node.getRigeon().strechRigeon(parent_node.getStartingRigeon(),node.getRigeon())
+					parent_node.getRigeon().strechRigeon(node.getRigeon())
 
-				for sibling in parent_node.getAllLowerLevelNode():
+				#for sibling in parent_node.getAllLowerLevelNode():
+				for sibling in self.nodes:
 					if sibling.name != node.name:
 						if node.getRigeon().hasAnyCommonLine(sibling.getRigeon()):
 							print('>>')
 							print(sibling)
-							sibling.getRigeon().strechRigeon(parent_node.getStartingRigeon(),node.getRigeon())
+							sibling.getRigeon().strechRigeon(node.getRigeon())
 
 				self.unregisterNode(node)
 
@@ -147,10 +152,6 @@ class CanNetwork(object):
 		if node.getParent():
 			node.getParent().removeChildren(node)
 
-	def showNodes(self):
-		for node in self.nodes:
-			#print(node, node.getRigeon())
-			node.show()
 	def IsNodeAvailable(self,x,y):
 		try:
 			val = self.node_dict[x][y]
@@ -164,9 +165,6 @@ class CanNetwork(object):
 			return True
 		except:
 			return False
-
-	def show(self):
-		self.canview.show()
 
 	def createSampleCAN(self):
 		point1 = Point(0,0)

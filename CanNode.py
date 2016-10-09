@@ -15,6 +15,7 @@ class CanNode(object):
 		self.children = []
 		self.parent = None
 		self.starting_rigeon = None
+		self.deleteReference = None
 	def getname(self):
 		return self.name
 	def setRigeon(self,rigeon):
@@ -41,7 +42,8 @@ class CanNode(object):
 		self.children.append(node)
 
 	def removeChildren(self,node):
-		self.children.remove(node)
+		if node in self.children:
+			self.children.remove(node)
 
 	def getChildren(self):
 		return self.children
@@ -102,9 +104,11 @@ class CanNode(object):
 
 		
 		#rigeon1,rigeon2 = self.getRigeon().divideRigeon()
+		node.deleteReference = self.getRigeon()
 		self.setRigeon(rigeon1)
 		node.setRigeon(rigeon2)
 		node.setStaringRigeon(rigeon2)
+
 
 		self.addChildren(node)
 		node.addParent(self)
