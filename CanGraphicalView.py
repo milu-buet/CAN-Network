@@ -131,7 +131,7 @@ class CanGraphicalView(object):
 		#self.canvas.move(ntext, 300, 300)
 		self.canvas.update()
 		
-		self.win.after(1700, self.reDraw())
+		self.win.after(1500, self.reDraw())
 		#self.reDraw()
 		self.addNodeTextBox.delete(0, END)
 
