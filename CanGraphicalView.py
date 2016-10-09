@@ -105,8 +105,9 @@ class CanGraphicalView(object):
 
 		route = self.CanNetwork.findRoute(fromNode,toNode)
 
-		for i in range(0,len(route)-1):
-			self.create_line(route[i],route[i+1])
+		if route:
+			for i in range(0,len(route)-1):
+				self.create_line(route[i],route[i+1])
 			
 
 	def create_line(self,node1,node2):
